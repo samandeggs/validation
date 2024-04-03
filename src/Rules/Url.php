@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Url extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid url";
 
@@ -84,6 +83,8 @@ class Url extends Rule
      */
     public function validateCommonScheme($value, $scheme = null): bool
     {
+        $value = (string) $value;
+
         if (!$scheme) {
             return $this->validateBasic($value) && (bool) preg_match("/^\w+:\/\//i", $value);
         } else {
@@ -99,6 +100,7 @@ class Url extends Rule
      */
     public function validateMailtoScheme($value): bool
     {
+        $value = (string) $value;
         return $this->validateBasic($value) && preg_match("/^mailto:/", $value);
     }
 
@@ -110,6 +112,7 @@ class Url extends Rule
      */
     public function validateJdbcScheme($value): bool
     {
+        $value = (string) $value;
         return (bool) preg_match("/^jdbc:\w+:\/\//", $value);
     }
 }

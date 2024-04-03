@@ -9,7 +9,8 @@ use Rakit\Validation\Rules\Required;
 
 class Validation
 {
-    use Traits\TranslationsTrait, Traits\MessagesTrait;
+    use Traits\TranslationsTrait;
+    use Traits\MessagesTrait;
 
     /** @var mixed */
     protected $validator;
@@ -53,7 +54,7 @@ class Validation
         $this->validator = $validator;
         $this->inputs = $this->resolveInputAttributes($inputs);
         $this->messages = $messages;
-        $this->errors = new ErrorBag;
+        $this->errors = new ErrorBag();
         foreach ($rules as $attributeKey => $rules) {
             $this->addAttribute($attributeKey, $rules);
         }
@@ -81,7 +82,7 @@ class Validation
      */
     public function getAttribute(string $attributeKey)
     {
-        return isset($this->attributes[$attributeKey])? $this->attributes[$attributeKey] : null;
+        return isset($this->attributes[$attributeKey]) ? $this->attributes[$attributeKey] : null;
     }
 
     /**
@@ -92,7 +93,7 @@ class Validation
      */
     public function validate(array $inputs = [])
     {
-        $this->errors = new ErrorBag; // reset error bag
+        $this->errors = new ErrorBag(); // reset error bag
         $this->inputs = array_merge($this->inputs, $this->resolveInputAttributes($inputs));
 
         // Before validation hooks
@@ -209,6 +210,8 @@ class Validation
         $attributes = [];
 
         foreach ($data as $key => $value) {
+            $key = (string) $key;
+
             if ((bool) preg_match('/^'.$pattern.'\z/', $key, $match)) {
                 $attr = new Attribute($this, $key, null, $attribute->getRules());
                 $attr->setPrimaryAttribute($attribute);
@@ -264,6 +267,8 @@ class Validation
         $pattern = str_replace('\*', '[^\.]+', preg_quote($attributeKey));
 
         foreach ($data as $key => $value) {
+            $key = (string) $key;
+
             if ((bool) preg_match('/^'.$pattern.'/', $key, $matches)) {
                 $keys[] = $matches[0];
             }
@@ -342,7 +347,7 @@ class Validation
      */
     protected function isEmptyValue($value): bool
     {
-        $requiredValidator = new Required;
+        $requiredValidator = new Required();
         return false === $requiredValidator->check($value, []);
     }
 
@@ -519,7 +524,7 @@ class Validation
         $exp = explode(':', $rule, 2);
         $rulename = $exp[0];
         if ($rulename !== 'regex') {
-            $params = isset($exp[1])? explode(',', $exp[1]) : [];
+            $params = isset($exp[1]) ? explode(',', $exp[1]) : [];
         } else {
             $params = [$exp[1]];
         }
@@ -547,7 +552,7 @@ class Validation
      */
     public function getAlias(string $attributeKey)
     {
-        return isset($this->aliases[$attributeKey])? $this->aliases[$attributeKey] : null;
+        return isset($this->aliases[$attributeKey]) ? $this->aliases[$attributeKey] : null;
     }
 
     /**

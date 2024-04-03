@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Digits extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute must be numeric and must have an exact length of :length";
 
@@ -25,6 +24,7 @@ class Digits extends Rule
 
         $length = (int) $this->parameter('length');
 
+        $value = (string) $value;
         return ! preg_match('/[^0-9]/', $value)
                     && strlen((string) $value) == $length;
     }

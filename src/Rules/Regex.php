@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Regex extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute is not valid format";
 
@@ -21,6 +20,7 @@ class Regex extends Rule
      */
     public function check($value): bool
     {
+        $value = (string) $value;
         $this->requireParameters($this->fillableParams);
         $regex = $this->parameter('regex');
         return preg_match($regex, $value) > 0;

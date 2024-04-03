@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class Alpha extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute only allows alphabet characters";
 
@@ -18,6 +17,7 @@ class Alpha extends Rule
      */
     public function check($value): bool
     {
+        $value = (string) $value;
         return is_string($value) && preg_match('/^[\pL\pM]+$/u', $value);
     }
 }

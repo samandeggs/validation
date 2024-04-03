@@ -6,7 +6,6 @@ use InvalidArgumentException;
 
 trait SizeTrait
 {
-
     /**
      * Get size (int) value from given $value
      *
@@ -51,6 +50,8 @@ trait SizeTrait
         if (!is_string($size)) {
             throw new InvalidArgumentException("Size must be string or numeric Bytes", 1);
         }
+
+        $size = (string) $size;
 
         if (!preg_match("/^(?<number>((\d+)?\.)?\d+)(?<format>(B|K|M|G|T|P)B?)?$/i", $size, $match)) {
             throw new InvalidArgumentException("Size is not valid format", 1);

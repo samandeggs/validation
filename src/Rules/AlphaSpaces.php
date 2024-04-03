@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class AlphaSpaces extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute may only allows alphabet and spaces";
 
@@ -18,10 +17,11 @@ class AlphaSpaces extends Rule
      */
     public function check($value): bool
     {
-        if (! is_string($value)) {
+        if (!is_string($value)) {
             return false;
         }
 
+        $value = (string) $value;
         return preg_match('/^[\pL\pM\s]+$/u', $value) > 0;
     }
 }

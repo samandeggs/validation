@@ -4,7 +4,6 @@ namespace Rakit\Validation;
 
 class ErrorBag
 {
-
     /** @var array */
     protected $messages = [];
 
@@ -59,7 +58,7 @@ class ErrorBag
             $messages = $this->filterMessagesForWildcardKey($key, $ruleName);
             return count(Helper::arrayDot($messages)) > 0;
         } else {
-            $messages = isset($this->messages[$key])? $this->messages[$key] : null;
+            $messages = isset($this->messages[$key]) ? $this->messages[$key] : null;
 
             if (!$ruleName) {
                 return !empty($messages);
@@ -83,14 +82,14 @@ class ErrorBag
             $flattenMessages = Helper::arrayDot($messages);
             return array_shift($flattenMessages);
         } else {
-            $keyMessages = isset($this->messages[$key])? $this->messages[$key] : [];
+            $keyMessages = isset($this->messages[$key]) ? $this->messages[$key] : [];
 
             if (empty($keyMessages)) {
                 return null;
             }
 
             if ($ruleName) {
-                return isset($keyMessages[$ruleName])? $keyMessages[$ruleName] : null;
+                return isset($keyMessages[$ruleName]) ? $keyMessages[$ruleName] : null;
             } else {
                 return array_shift($keyMessages);
             }
@@ -116,7 +115,7 @@ class ErrorBag
                 }
             }
         } else {
-            $keyMessages = isset($this->messages[$key])? $this->messages[$key] : [];
+            $keyMessages = isset($this->messages[$key]) ? $this->messages[$key] : [];
             foreach ($keyMessages as $rule => $message) {
                 if ($ruleName and $ruleName != $rule) {
                     continue;
@@ -187,7 +186,7 @@ class ErrorBag
     {
         $expl = explode(':', $key, 2);
         $key = $expl[0];
-        $ruleName = isset($expl[1])? $expl[1] : null;
+        $ruleName = isset($expl[1]) ? $expl[1] : null;
         return [$key, $ruleName];
     }
 
@@ -218,6 +217,8 @@ class ErrorBag
         $filteredMessages = [];
 
         foreach ($messages as $k => $keyMessages) {
+            $k = (string) $k;
+
             if ((bool) preg_match('#^'.$pattern.'\z#u', $k) === false) {
                 continue;
             }

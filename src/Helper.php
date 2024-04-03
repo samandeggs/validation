@@ -4,7 +4,6 @@ namespace Rakit\Validation;
 
 class Helper
 {
-
     /**
      * Determine if a given string matches a given pattern.
      * Adapted from: https://github.com/illuminate/support/blob/v5.3.23/Str.php#L119
@@ -25,6 +24,8 @@ class Helper
         // to make it convenient to check if the strings starts with the given
         // pattern such as "library/*", making any string check convenient.
         $pattern = str_replace('\*', '.*', $pattern);
+
+        $value = (string) $value;
 
         return (bool) preg_match('#^'.$pattern.'\z#u', $value);
     }

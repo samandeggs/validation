@@ -1,26 +1,34 @@
-Rakit Validation - PHP Standalone Validation Library
-======================================================
+samandeggs/validation is a fork of rakit/validation - purely as it's no longer maintained, we needed to remove php8 deprecations only. No other features will be added here.
+
+#### Installation
+
+```
+composer require "samandeggs/validation"
+```
+
+Below is the original README.md
+
+# Rakit Validation - PHP Standalone Validation Library
 
 [![Build Status](https://img.shields.io/travis/rakit/validation.svg?style=flat-square)](https://travis-ci.org/rakit/validation)
 [![Coverage Status](https://coveralls.io/repos/github/rakit/validation/badge.svg?branch=setup_coveralls)](https://coveralls.io/github/rakit/validation)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://doge.mit-license.org)
 
-
 PHP Standalone library for validating data. Inspired by `Illuminate\Validation` Laravel.
 
 ## Features
 
-* API like Laravel validation.
-* Array validation.
-* `$_FILES` validation with multiple file support.
-* Custom attribute aliases.
-* Custom validation messages.
-* Custom rule.
+- API like Laravel validation.
+- Array validation.
+- `$_FILES` validation with multiple file support.
+- Custom attribute aliases.
+- Custom validation messages.
+- Custom rule.
 
 ## Requirements
 
-* PHP 7.0 or higher
-* Composer for installation
+- PHP 7.0 or higher
+- Composer for installation
 
 ## Quick Start
 
@@ -156,8 +164,8 @@ Now if `province_id` value is empty, error message would be 'Province is require
 
 Before register/set custom messages, here are some variables you can use in your custom messages:
 
-* `:attribute`: will replaced into attribute alias.
-* `:value`: will replaced into stringify value of attribute. For array and object will replaced to json.
+- `:attribute`: will replaced into attribute alias.
+- `:value`: will replaced into stringify value of attribute. For array and object will replaced to json.
 
 And also there are several message variables depends on their rules.
 
@@ -416,7 +424,6 @@ Get count messages.
 
 Check if given key has an error. It returns `bool` if a key has an error, and otherwise.
 
-
 ## Getting Validated, Valid, and Invalid Data
 
 For example you have validation like this:
@@ -527,17 +534,17 @@ The field under validation must be present and not empty only when all of the ot
 This rule will validate data from `$_FILES`.
 Field under this rule must be follows rules below to be valid:
 
-* `$_FILES['key']['error']` must be `UPLOAD_ERR_OK` or `UPLOAD_ERR_NO_FILE`. For `UPLOAD_ERR_NO_FILE` you can validate it with `required` rule.
-* If min size is given, uploaded file size **MUST NOT** be lower than min size.
-* If max size is given, uploaded file size **MUST NOT** be higher than max size.
-* If file types is given, mime type must be one of those given types.
+- `$_FILES['key']['error']` must be `UPLOAD_ERR_OK` or `UPLOAD_ERR_NO_FILE`. For `UPLOAD_ERR_NO_FILE` you can validate it with `required` rule.
+- If min size is given, uploaded file size **MUST NOT** be lower than min size.
+- If max size is given, uploaded file size **MUST NOT** be higher than max size.
+- If file types is given, mime type must be one of those given types.
 
 Here are some example definitions and explanations:
 
-* `uploaded_file`: uploaded file is optional. When it is not empty, it must be `ERR_UPLOAD_OK`.
-* `required|uploaded_file`: uploaded file is required, and it must be `ERR_UPLOAD_OK`.
-* `uploaded_file:0,1M`: uploaded file size must be between 0 - 1 MB, but uploaded file is optional.
-* `required|uploaded_file:0,1M,png,jpeg`: uploaded file size must be between 0 - 1MB and mime types must be `image/jpeg` or `image/png`.
+- `uploaded_file`: uploaded file is optional. When it is not empty, it must be `ERR_UPLOAD_OK`.
+- `required|uploaded_file`: uploaded file is required, and it must be `ERR_UPLOAD_OK`.
+- `uploaded_file:0,1M`: uploaded file size must be between 0 - 1 MB, but uploaded file is optional.
+- `required|uploaded_file:0,1M,png,jpeg`: uploaded file size must be between 0 - 1MB and mime types must be `image/jpeg` or `image/png`.
 
 Optionally, if you want to have separate error message between size and type validation.
 You can use `mimes` rule to validate file types, and `min`, `max`, or `between` to validate it's size.
@@ -547,12 +554,12 @@ For multiple file upload, PHP will give you undesirable array `$_FILES` structur
 For example if you have input files like this:
 
 ```html
-<input type="file" name="photos[]"/>
-<input type="file" name="photos[]"/>
-<input type="file" name="photos[]"/>
+<input type="file" name="photos[]" />
+<input type="file" name="photos[]" />
+<input type="file" name="photos[]" />
 ```
 
-You can  simply validate it like this:
+You can simply validate it like this:
 
 ```php
 $validation = $validator->validate($_FILES, [
@@ -569,8 +576,8 @@ $validation = $validator->validate($_FILES, [
 Or if you have input files like this:
 
 ```html
-<input type="file" name="images[profile]"/>
-<input type="file" name="images[cover]"/>
+<input type="file" name="images[profile]" />
+<input type="file" name="images[cover]" />
 ```
 
 You can validate it like this:
@@ -798,7 +805,7 @@ $validation = $validator->validate($inputs, [
 ```
 
 > For common URL scheme and mailto, we combine `FILTER_VALIDATE_URL` to validate URL format and `preg_match` to validate it's scheme.
-  Except for JDBC URL, currently it just check a valid JDBC scheme.
+> Except for JDBC URL, currently it just check a valid JDBC scheme.
 
 </details>
 
@@ -884,6 +891,7 @@ Opposite of `same`. The field value under this rule must be different with `anot
 <details><summary><strong>after</strong>:tomorrow</summary>
 
 Anything that can be parsed by `strtotime` can be passed as a parameter to this rule. Valid examples include :
+
 - after:next week
 - after:2016-12-31
 - after:2016
@@ -938,7 +946,7 @@ $validation = $validator->validate($_POST, [
 ```
 
 > Note: `Rakit\Validation\Rules\Callback` instance is binded into your Closure.
-  So you can access rule properties and methods using `$this`.
+> So you can access rule properties and methods using `$this`.
 
 </details>
 
@@ -1029,7 +1037,7 @@ $params['except'] = 'exception@mail.com';
 ```
 
 > If you want your custom rule accept parameter list like `in`,`not_in`, or `uploaded_file` rules,
-  you just need to override `fillParameters(array $params)` method in your custom rule class.
+> you just need to override `fillParameters(array $params)` method in your custom rule class.
 
 Note that `unique` rule that we created above also can be used like this:
 

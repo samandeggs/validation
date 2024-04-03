@@ -6,7 +6,6 @@ use Rakit\Validation\Rule;
 
 class DigitsBetween extends Rule
 {
-
     /** @var string */
     protected $message = "The :attribute must have a length between the given :min and :max";
 
@@ -22,7 +21,7 @@ class DigitsBetween extends Rule
     public function check($value): bool
     {
         $this->requireParameters($this->fillableParams);
-
+        $value = (string) $value;
         $min = (int) $this->parameter('min');
         $max = (int) $this->parameter('max');
 
