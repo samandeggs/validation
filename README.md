@@ -1,11 +1,5 @@
 samandeggs/validation is a fork of rakit/validation - purely as it's no longer maintained, we needed to remove php8 deprecations only. No other features will be added here.
 
-#### Installation
-
-```
-composer require "samandeggs/validation"
-```
-
 Below is the original README.md
 
 # Rakit Validation - PHP Standalone Validation Library
