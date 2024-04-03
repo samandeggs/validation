@@ -1,11 +1,11 @@
 {
-  "name": "rakit/validation",
-  "description": "PHP Laravel like standalone validation library",
+  "name": "samandeggs/validation",
+  "description": "PHP Laravel like standalone validation library - based on Rakit/Validation",
   "license": "MIT",
   "authors": [
     {
-      "email": "emsifa@gmail.com",
-      "name": "Muhammad Syifa"
+      "email": "sam@infused.io",
+      "name": "sam mulliss"
     }
   ],
   "autoload": {
@@ -15,7 +15,10 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Rakit\\Validation\\Tests\\": ["tests", "tests/Fixtures"]
+      "Rakit\\Validation\\Tests\\": [
+        "tests",
+        "tests/Fixtures"
+      ]
     }
   },
   "require": {
@@ -29,8 +32,8 @@
   },
   "scripts": {
     "test": [
-        "phpunit",
-        "phpcs"
+      "phpunit",
+      "phpcs"
     ]
   }
 }
